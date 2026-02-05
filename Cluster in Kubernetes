@@ -1,0 +1,141 @@
+What is a Cluster in Kubernetes?
+
+A Kubernetes cluster is a group of machines (nodes) that work together to run containerized applications.
+
+Think of it as one big system, even though it is made of many computers.
+
+Main Parts of a K8s Cluster
+1️⃣ Control Plane (Master)
+
+This is the brain of the cluster.
+
+Decides what should run
+
+Schedules Pods on nodes
+
+Manages cluster state
+
+Key components:
+
+API Server
+
+Scheduler
+
+Controller Manager
+
+etcd (cluster database)
+
+2️⃣ Worker Nodes
+
+These are the machines that actually run your application.
+
+Run Pods and containers
+
+Have:
+
+kubelet
+
+container runtime (Docker / containerd)
+
+kube-proxy
+
+Simple Flow
+
+You give instructions → Control Plane
+Apps run → Worker Nodes
+
+Easy Example
+
+1 cluster
+
+1 master node
+
+3 worker nodes
+
+Your app runs as Pods across those workers
+
+One-Line Interview Answer
+
+“A Kubernetes cluster is a set of master and worker nodes that work together to deploy, manage, and scale containerized applications.”
+
+Easy Memory Trick
+
+Cluster = Team of machines working as one
+
+From here, the universe branches out: namespaces slice the cluster into logical rooms, Pods become the smallest living things inside it, and controllers quietly keep order while pretending they aren’t doing magic.
+
+* kubelet
+
+explain it 
+
+Ahh, you mean kubelet 👍
+Let’s explain it slow + clear, no confusion.
+
+What is kubelet?
+
+kubelet is an agent that runs on every worker node in a Kubernetes cluster.
+
+Its main job is to make sure Pods are running exactly as the Control Plane says.
+
+What does kubelet do?
+1️⃣ Talks to Control Plane
+
+kubelet continuously talks to the API Server
+
+It asks:
+👉 “Which Pods should run on my node?”
+
+2️⃣ Creates & Manages Pods
+
+When it gets Pod info:
+
+Pulls container images
+
+Starts containers using container runtime (Docker / containerd)
+
+Restarts containers if they crash
+
+3️⃣ Health Checking
+
+Monitors Pod & container health
+
+Reports status back to Control Plane
+
+4️⃣ Node Management
+
+Reports:
+
+CPU usage
+
+Memory usage
+
+Node status (Ready / NotReady)
+
+What kubelet does NOT do ❌
+
+It does not schedule Pods
+
+It does not talk directly to etcd
+
+It does not manage other nodes
+
+(Scheduler does scheduling, kubelet only executes)
+
+Simple Flow (easy to remember)
+Control Plane → kubelet → Containers
+
+Real-Life Example 🏭
+
+Control Plane = Manager
+
+kubelet = Supervisor
+
+Containers = Workers
+
+Manager says:
+“Run 3 workers on this machine”
+Supervisor (kubelet) makes it happen.
+
+One-line Interview Answer
+
+“Kubelet is a node-level agent that runs on every worker node and ensures containers are running as defined in Pod specifications.”
