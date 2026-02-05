@@ -1,0 +1,94 @@
+First, one line meaning
+
+Affinity = “Keep things together”
+
+Anti-Affinity = “Keep things separate”
+
+Kubernetes uses these rules while scheduling Pods.
+
+1️⃣ Node Affinity (Pod → Node)
+👉 What it means
+
+Pod says “I want to run on this type of node.”
+
+Example (Simple)
+
+Node has label: disk=ssd
+
+Pod says: run only on SSD nodes
+
+If no SSD node exists:
+
+Required rule → Pod will NOT start
+
+Preferred rule → Pod will run on any node
+
+Real-life example
+
+“I want a room with AC.”
+
+2️⃣ Pod Affinity (Pod → Pod)
+👉 What it means
+
+Pod says “I want to run near this other pod.”
+
+Example
+
+Backend pod wants to be near database pod
+
+For faster network, same node / same zone
+
+Real-life example
+
+“I want to sit near my friend in class.”
+
+3️⃣ Pod Anti-Affinity (Pod ≠ Pod)
+👉 What it means
+
+Pod says “I do NOT want to run near this other pod.”
+
+Example
+
+Nginx replicas should NOT be on same node
+
+If one node fails, all pods should not die
+
+Real-life example
+
+“Do not sit all students on one bench.”
+
+Required vs Preferred (Very Important)
+🔴 Required (Hard rule)
+
+Must follow
+
+If not matched → Pod stays Pending
+
+🟢 Preferred (Soft rule)
+
+Kubernetes tries
+
+If not matched → Pod still runs
+
+Simple Table (Easy to Remember)
+Type	Meaning
+Node Affinity	Pod chooses node
+Pod Affinity	Pod wants nearby pod
+Pod Anti-Affinity	Pod wants separation
+Required	Must follow
+Preferred	Best effort
+One-Line Interview Answers
+
+Affinity helps performance
+
+Anti-Affinity improves availability
+
+Node affinity replaces nodeSelector
+
+Pod anti-affinity avoids single point of failure
+
+Very Short Example Sentence
+
+“Run nginx pods on different nodes so that one node failure does not bring down the app.”
+
+That is Pod Anti-Affinity 👍
