@@ -1,0 +1,62 @@
+1️⃣ Node Name–Based Scheduling
+What it means
+
+We manually tell Kubernetes to run a Pod on one specific worker node by using the node name in the deployment file.
+
+Example idea:
+
+“Run this pod only on worker-node-1.”
+
+Kubernetes will not choose another node.
+
+How it is done (concept)
+
+We use nodeName in the Pod spec.
+
+spec:
+  nodeName: worker-node-1
+
+
+This forces the pod to run only on that node.
+
+Limitations (Very Important)
+❌ 1. Only one node can be mentioned
+
+You can specify only ONE worker node
+
+You cannot give multiple node options
+
+❌ 2. No rescheduling if node goes down
+
+If that worker node fails or goes down
+
+Pod will NOT move to another node
+
+Pod goes into Pending state
+
+Why this is BAD for production
+
+No High Availability
+
+Single point of failure
+
+Manual and inflexible
+
+Real-Life Example
+
+“I will sit only on seat number 5.
+If seat 5 is broken, I will stand and wait.”
+
+Better Alternative (Recommended)
+
+Use:
+
+Node Affinity
+
+Pod Anti-Affinity
+
+These allow Kubernetes to choose another node automatically.
+
+One-Line Interview Answer
+
+Node name–based scheduling forces a pod to run on a specific node, but if that node fails, the pod stays pending and does not reschedule.
