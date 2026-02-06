@@ -139,3 +139,8 @@ Supervisor (kubelet) makes it happen.
 One-line Interview Answer
 
 “Kubelet is a node-level agent that runs on every worker node and ensures containers are running as defined in Pod specifications.”
+
+Next
+
+Topic:- 
+
