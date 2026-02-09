@@ -144,5 +144,9 @@ Next
 
 Topic:- 
 
-Kubernetes cluster
+If the Kubernets scheduler goes down what happen?
+
+One-line interview answer 💯
+
+If the Kubernetes scheduler goes down, existing workloads continue running, but no new pods can be scheduled until the scheduler is restored.
 
