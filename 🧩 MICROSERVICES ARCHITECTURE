@@ -36,13 +36,16 @@ Easy to scale	Scale only busy service (e.g., payments)
 Fault isolation	One service crash ≠ whole app crash
 Faster development	Multiple teams work independently
 Tech freedom	Each service can use different tech
+
 ❌ Problems
 Problem	Why
 Complex setup	Needs DevOps, Kubernetes, monitoring
 Network calls	Slower than internal calls
 Debugging hard	Many services involved
 Data consistency tricky	Multiple databases
+
 ⚖️ Side-by-Side Comparison
+
 Feature	Monolithic	Microservices
 App structure	One big app	Many small apps
 Deployment	Single deployment	Deploy each service separately
@@ -51,7 +54,9 @@ Scaling	Scale whole app	Scale only needed service
 Failure impact	Whole app down	Only one service down
 Complexity	Simple	Complex
 Best for	Small/medium apps	Large, growing systems
+
 🧠 Easy Interview Line
+
 Monolith = All features in one application.
 Microservices = Application split into small independent services.
 
