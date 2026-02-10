@@ -1,4 +1,4 @@
-12-06-2023: DAY-01: INTRO, INSTALLATION, ARCHITECTURE & COMMANDS (ADD, COMMIT, STATUS, RESTORE, LOGS)
+ DAY-01: INTRO, INSTALLATION, ARCHITECTURE & COMMANDS (ADD, COMMIT, STATUS, RESTORE, LOGS)
 
 GIT:
 yum install git -y: to install git
@@ -92,7 +92,7 @@ HISTORY:
 
 ===============================================================
 
-13-06-2023: DAY-02: BRACHES, MEREGE, REBASE, GITHUB
+DAY-02: BRACHES, MEREGE, REBASE, GITHUB
 
 BRANCH: It is an individual line of development.
 developers can develop the source code independently.
@@ -212,7 +212,7 @@ HISTORY:
 
  ======================================================================
  
- 14-06-2023: DAY-03: PULL, PUSH, REVERT, CHERRYPICK, STASH & SOME UI CONECOTS OF GITHUB
+  DAY-03: PULL, PUSH, REVERT, CHERRYPICK, STASH & SOME UI CONECOTS OF GITHUB
  
  REVERT: To undo the merging of two branches
 git revert branchname
