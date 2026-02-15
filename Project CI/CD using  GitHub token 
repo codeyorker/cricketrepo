@@ -1,0 +1,96 @@
+🔥 Project 1: CI/CD Pipeline using Jenkins, Docker & AWS
+🎯 Project Goal
+Automatically deploy an application when code is pushed to GitHub.
+Copy code
+
+GitHub → Jenkins → Docker Build → Deploy on AWS EC2
+Also:
+Container should restart automatically
+Application should come back after server reboot
+
+🧱 Tech Stack
+GitHub
+Jenkins
+Docker
+AWS EC2 (Ubuntu)
+Django Todo Application
+🧩 Architecture Flow
+Copy code
+
+Developer pushes code to GitHub
+        ↓
+      Jenkins pulls code
+        ↓
+     Docker image build
+        ↓
+   Docker container runs
+        ↓
+      AWS EC2
+
+✅ Step 1: AWS EC2 Setup
+OS: Ubuntu 20.04
+Instance type: t2.micro
+Open ports:
+22 (SSH)
+8080 (Jenkins)
+8000 (Application)
+
+✅ Step 2: Jenkins Installation
+Installed OpenJDK 21
+Installed and configured Jenkins
+Jenkins runs on port 8080
+
+✅ Step 3: Docker Installation
+Installed Docker on EC2
+Added Jenkins user to Docker group
+Restarted Jenkins to apply permissions
+
+✅ Step 4: GitHub Integration
+Generated GitHub Personal Access Token
+Added token to Jenkins credentials
+Configured Jenkins to pull code securely
+
+✅ Step 5: Dockerfile
+Dockerfile
+Copy code
+FROM python:3.9
+WORKDIR /app
+COPY . .
+RUN pip install --upgrade pip
+RUN pip install django==3.2
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+✅ Step 6: Jenkins Job Configuration
+Created Jenkins Freestyle Job
+Connected GitHub repository
+Added shell build step:
+Bash
+Copy code
+docker build -t todo-app .
+docker stop todo || true
+docker rm todo || true
+docker run -d \
+--name todo \
+--restart=always \
+-p 8000:8000 \
+todo-app
+
+✅ Step 7: Testing
+Pushed code to GitHub
+Jenkins triggered automatically
+Application accessible at:
+Copy code
+
+http://<EC2-IP>:8000
+After server reboot, container starts automatically
+📌 Key Learnings
+Jenkins CI/CD pipeline creation
+GitHub authentication using tokens
+Docker image build and deployment
+Handling build failures and debugging
+Container auto-restart using Docker restart policies
+
+AWS EC2 deployment
+
+🎤 One-line Interview Explanation
+“I built a CI/CD pipeline where Jenkins pulls code from GitHub, builds a Docker image, and deploys a Django application on AWS EC2 with automatic container restart.”
