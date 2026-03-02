@@ -49,12 +49,6 @@ If seat 5 is broken, I will stand and wait.”
 
 Better Alternative (Recommended)
 
-Use:
-
-Node Affinity
-
-Pod Anti-Affinity
-
 These allow Kubernetes to choose another node automatically.
 
 One-Line Interview Answer
