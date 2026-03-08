@@ -5,6 +5,7 @@ A Kubernetes cluster is a group of machines (nodes) that work together to run co
 Think of it as one big system, even though it is made of many computers.
 
 Main Parts of a K8s Cluster
+
 1️⃣ Control Plane (Master)
 
 This is the brain of the cluster.
@@ -290,4 +291,3 @@ Ensure that HAProxy is routing traffic to the remaining master node. Check the s
 curl -k https://<LOAD_BALANCER_IP>:6443/version
 Summary
 By installing etcdctl and using it to check the health and membership of the etcd cluster, you can ensure that your HA setup is working correctly. Additionally, configuring HAProxy to route traffic properly and simulating master node failures will help verify the resilience and high availability of your Kubernetes cluster.
-by
