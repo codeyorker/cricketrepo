@@ -1,0 +1,29 @@
+Cron Job Format:
+
+* * * * * command-to-execute
+| | | | |
+| | | | └── Day of the week (0 - 6) [Sunday = 0]
+| | | └──── Month (1 - 12)
+| | └────── Day of the month (1 - 31)
+| └──────── Hour (0 - 23)
+└────────── Minute (0 - 59)
+------------------------------------------------------
+Examples:
+1️⃣ Run a script every day at 5 AM
+0 5 * * * /path/to/script.sh
+
+------------------------------------------------------
+2️⃣ Run a script every Monday at 2:30 AM
+30 2 * * 1 /path/to/script.sh
+
+------------------------------------------------------
+3️⃣ Run a script every 10 minutes
+*/10 * * * * /path/to/script.sh
+
+---------------------------------------------------------
+4️⃣ Run a script on the 1st and 15th of each month at midnight
+0 0 1,15 * * /path/to/script.sh
+
+------------------------------------------------------------
+5️⃣ Run a script every Sunday at 8 PM
+0 20 * * 0 /path/to/script.sh
