@@ -1,0 +1,286 @@
+Most Useful Kubernetes Commands: Complete Guide with Concepts
+Understanding Core Kubernetes Concepts First
+Before diving into commands, it's important to understand what you're managing. Kubernetes is an orchestration platform that manages containerized applications across clusters of machines. The main resources you'll work with include Pods (smallest deployable units), Deployments (managing replicas of pods), Services (networking), and ConfigMaps/Secrets (configuration management).
+
+1. Configuration & Context Management
+These commands establish your connection to Kubernetes clusters and manage which cluster you're working with.
+
+Copy# View your current configuration
+kubectl config view
+
+# List all available contexts (cluster configurations)
+kubectl config get-contexts
+
+# Show your current context
+kubectl config current-context
+
+# Switch to a different cluster context
+kubectl config use-context my-cluster-name
+
+# Set a specific namespace as default for current context
+kubectl config set-context --current --namespace=my-namespace
+Why use these? When working with multiple Kubernetes clusters, you need to ensure you're executing commands against the right cluster. Context switching prevents accidental deployments to production.
+
+2. Viewing Resources (The GET Commands)
+Getting information about your cluster's resources is fundamental. These commands retrieve data without modifying anything.
+
+Copy# List all pods in the current namespace
+kubectl get pods
+
+# List all pods across all namespaces
+kubectl get pods --all-namespaces
+# Shorthand: kubectl get pods -A
+
+# List pods with detailed information
+kubectl get pods -o wide
+
+# Get detailed YAML for a specific pod
+kubectl get pod my-pod -o yaml
+
+# List all services in the cluster
+kubectl get services
+
+# List all deployments
+kubectl get deployments
+
+# Sort resources by a specific field
+kubectl get pods --sort-by=.metadata.creationTimestamp
+
+# Filter pods by label selector
+kubectl get pods -l app=myapp
+Why use these? These are your primary tools for monitoring what's running in your cluster. The -o flag (output format) gives you flexibility in how you view data.
+
+3. Describing Resources (Getting Deep Details)
+When you need more comprehensive information about a specific resource, describe provides a human-readable summary including events and status conditions.
+
+Copy# Get detailed information about a specific pod
+kubectl describe pod my-pod
+
+# Describe a deployment
+kubectl describe deployment my-deployment
+
+# Describe a node
+kubectl describe node my-node
+Why use these? When troubleshooting, describe shows you events, conditions, and status that indicate what went wrong. The get command shows the configuration, while describe shows the actual state and what happened to reach that state.
+
+4. Creating Resources
+There are two approaches to creating resources: declarative (recommended) and imperative.
+
+Copy# Declarative approach - create from YAML file (recommended)
+kubectl apply -f my-manifest.yaml
+
+# Create from multiple files
+kubectl apply -f ./dir
+
+# Create from a URL
+kubectl apply -f https://example.com/manifest.yaml
+
+# Imperative approach - create resources directly with flags
+kubectl create deployment my-app --image=nginx
+
+# Create a job
+kubectl create job my-job --image=busybox -- echo "Hello"
+
+# Create a cronjob
+kubectl create cronjob my-cronjob --image=busybox --schedule="0 0 * * *" -- echo "Scheduled"
+
+# Create a pod interactively
+kubectl run my-pod --image=nginx
+Why use these? The declarative approach (kubectl apply) is preferred for production because it tracks infrastructure as code. Imperative commands are useful for quick testing but shouldn't be used for persistent configurations.
+
+5. Updating and Managing Resources
+These commands modify existing resources in your cluster.
+
+Copy# Update an image in a deployment (rolling update)
+kubectl set image deployment/my-app container=new-image:v2
+
+# Scale a deployment to a specific number of replicas
+kubectl scale deployment my-app --replicas=3
+
+# Add a label to a pod
+kubectl label pods my-pod environment=production
+
+# Remove a label
+kubectl label pods my-pod environment-
+
+# Add an annotation
+kubectl annotate pods my-pod description="This is my pod"
+
+# Edit a resource in your default editor
+kubectl edit pod my-pod
+
+# Patch a resource (make quick changes)
+kubectl patch pod my-pod -p '{"spec":{"activeDeadlineSeconds":120}}'
+Why use these? These commands let you modify resources without redeploying. Rolling updates gradually replace old pod instances with new ones, preventing downtime.
+
+6. Rollout Management (Deployment Updates)
+When you update a deployment, Kubernetes manages the transition. These commands control that process.
+
+Copy# Check the history of rollouts for a deployment
+kubectl rollout history deployment/my-app
+
+# Check the status of an ongoing rollout
+kubectl rollout status deployment/my-app
+
+# Rollback to the previous version
+kubectl rollout undo deployment/my-app
+
+# Rollback to a specific revision
+kubectl rollout undo deployment/my-app --to-revision=2
+
+# Restart a deployment (recreate all pods)
+kubectl rollout restart deployment/my-app
+Why use these? Rollouts allow you to deploy new versions safely. If something goes wrong, you can quickly rollback to the previous version without manual intervention.
+
+7. Debugging: Viewing Logs
+Logs help you understand what's happening inside your containers and troubleshoot issues.
+
+Copy# View logs from a pod
+kubectl logs my-pod
+
+# Stream logs in real-time (like tail -f)
+kubectl logs -f my-pod
+
+# View logs from a previous container instance
+kubectl logs my-pod --previous
+
+# View logs from a specific container in a multi-container pod
+kubectl logs my-pod -c my-container
+
+# View logs from all pods with a specific label
+kubectl logs -l app=myapp
+
+# View logs from a deployment
+kubectl logs deploy/my-deployment
+Why use these? Logs are your first debugging tool. They show application output, errors, and warnings that help identify issues.
+
+8. Executing Commands Inside Containers
+Sometimes you need to run commands inside a running container for debugging or inspection.
+
+Copy# Execute a command in a pod
+kubectl exec my-pod -- ls /
+
+# Open an interactive shell inside a pod
+kubectl exec -it my-pod -- /bin/sh
+
+# Execute a command in a specific container (multi-container pods)
+kubectl exec my-pod -c my-container -- env
+
+# Run a one-off pod for debugging
+kubectl run -it busybox --image=busybox -- sh
+Why use these? Interactive access lets you investigate what's happening inside your container. This is essential when logs don't tell you everything.
+
+9. Networking: Port Forwarding and Service Exposure
+These commands help you access services and test connectivity.
+
+Copy# Forward a local port to a pod's port
+kubectl port-forward pod/my-pod 8080:8000
+
+# Forward a local port to a service
+kubectl port-forward svc/my-service 8080:80
+
+# Expose a deployment as a service
+kubectl expose deployment my-app --port=80 --target-port=8000 --type=LoadBalancer
+
+# View all services
+kubectl get svc
+Why use these? Port forwarding lets you test applications without exposing them to the internet. Services provide stable endpoints for accessing your applications.
+
+10. Deletion: Cleaning Up Resources
+Remove resources you no longer need to avoid wasting resources and money.
+
+Copy# Delete a specific pod
+kubectl delete pod my-pod
+
+# Delete a deployment (and its pods)
+kubectl delete deployment my-app
+
+# Delete all pods in the current namespace
+kubectl delete pods --all
+
+# Delete with a grace period (time to shut down gracefully)
+kubectl delete pod my-pod --grace-period=30
+
+# Force delete immediately
+kubectl delete pod my-pod --force
+
+# Delete multiple resource types
+kubectl delete pods,services -l app=myapp
+Why use these? Proper deletion ensures resources are cleaned up correctly. The grace period allows applications to shut down gracefully, saving data and closing connections properly.
+
+11. Cluster Information and Diagnostics
+These commands give you visibility into your cluster's health and structure.
+
+Copy# Get cluster information
+kubectl cluster-info
+
+# View all nodes in the cluster
+kubectl get nodes
+
+# Describe a node to see its resources and conditions
+kubectl describe node my-node
+
+# Show resource usage (requires metrics-server installed)
+kubectl top nodes
+kubectl top pod
+
+# Mark a node as unschedulable (for maintenance)
+kubectl cordon my-node
+
+# Drain a node (move pods before maintenance)
+kubectl drain my-node
+
+# Mark a node as schedulable again
+kubectl uncordon my-node
+Why use these? These commands help you manage cluster infrastructure. Cordoning and draining are essential for safe node maintenance.
+
+12. Advanced Output Formatting
+Kubernetes provides powerful output options to extract exactly the data you need.
+
+Copy# Output as JSON
+kubectl get pods -o json
+
+# Output as YAML
+kubectl get pods -o yaml
+
+# Custom columns
+kubectl get pods -o=custom-columns=NAME:.metadata.name,RESTARTS:.status.containerStatuses[0].restartCount
+
+# JSONPath extraction
+kubectl get pods -o jsonpath='{.items[*].metadata.name}'
+
+# Wide output with additional columns
+kubectl get pods -o wide
+Why use these? Advanced formatting lets you extract specific information and integrate kubectl with scripts or other tools.
+
+13. Essential Best Practices
+Use these patterns in your daily work:
+
+Copy# Always specify namespaces for safety
+kubectl get pods -n production
+
+# Use labels for organization
+kubectl label nodes node1 disk=ssd
+kubectl get pods -l tier=frontend
+
+# Use dry-run to test before applying
+kubectl apply -f deployment.yaml --dry-run=client
+
+# Check diffs before applying
+kubectl diff -f deployment.yaml
+
+# Use resource quotas to prevent resource exhaustion
+kubectl describe quota -n my-namespace
+Quick Command Reference Table
+Task	Command
+View pods	kubectl get pods
+Describe pod details	kubectl describe pod NAME
+View logs	kubectl logs POD_NAME
+Execute command	kubectl exec -it POD_NAME -- COMMAND
+Create resource	kubectl apply -f file.yaml
+Update image	kubectl set image deployment/NAME container=IMAGE
+Scale deployment	kubectl scale deployment/NAME --replicas=N
+Rollback	kubectl rollout undo deployment/NAME
+Delete resource	kubectl delete pod/service/deployment NAME
+Port forward	kubectl port-forward pod/NAME 8080:8000
+These commands form the foundation of Kubernetes management. Mastering them makes you effective in managing containerized applications at scale.
