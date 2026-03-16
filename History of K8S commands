@@ -1,4 +1,11 @@
-clear
+vim nginx
+   17  kubectl create ns yorkerops 
+   18  kubectl  get namespace 
+   19  kubectl apply -f nginx -n yorkerops 
+   20  kubectl get pods 
+   21  kubectl get pods  -n yorkerops 
+   22  kubectl describe pod tomcat-deployment-6d98b68bfc-bbbr4 
+   23  kubectl describe pod tomcat-deployment-6d98b68bfc-bbbr4  -n yorkerops 
    25  kubectl get pod -n yorkerops 
    26  kubectl logs tomcat-deployment-6d98b68bfc-bbbr4 -n yorkerops 
    27  kubectl get service
