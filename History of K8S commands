@@ -1,0 +1,31 @@
+clear
+   25  kubectl get pod -n yorkerops 
+   26  kubectl logs tomcat-deployment-6d98b68bfc-bbbr4 -n yorkerops 
+   27  kubectl get service
+   28  kubectl get pod -n yorkerops 
+   29  kubectl get po tomcat-deployment-6d98b68bfc-bbbr4 -o yaml 
+   30  clear
+   31  kubectl get pod 
+   32  kubectl get pod  -n yorkerops 
+   33  vim nginx 
+   34  kubectl  apply -f nginx  -n yorkerops 
+   35  kubectl  get po -n yorkerops 
+   36  kubectl get deploy -n yorkerops 
+   37  clear
+   38  kubectl scale tomcat-deployment  --repicas=3 
+   39  kubectl scale tomcat-deployment  -replicas=3 -n yorkerops 
+   40  kubectl scale deploy  tomcat-deployment  --replicas=3 -n yorkerops 
+   41  clear
+   42  kubectl  get po -n yorkerops 
+   43  kubectl edit pod tomcat-deployment-785c4d6459-7gzrf -n yorkerops 
+   44  kubectl rollout history deployment/tomcat-deployment
+   45  kubectl rollout history deployment/tomcat-deployment-785c4d6459-5kdjl
+   46  kubectl rollout history deployment/tomcat-deployment-785c4d6459-5kdjl -n yorkerops 
+   47  kubectl  get deploy -n yorkerops 
+   48  kubectl rollout history deployment/tomcat-deployment -n yorkerops 
+   49  kubectl rollout status deployment/tomcat-deployment -n yorkerops 
+   50  kubectl get po -n yorkerops 
+   51  kubectl rollout restart  deployment/tomcat-deployment -n yorkerops 
+   52  kubectl get po -n yorkerops 
+   53  clear
+   54  kubectl get po -n yorkerops 
