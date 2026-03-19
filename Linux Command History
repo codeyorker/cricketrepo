@@ -1,0 +1,78 @@
+root@controlplane:/$ history 
+    1  exit
+    2  halt
+    3  kubectl get no 
+    4  docker run -d --name kong-database -p 5432:5432 -e POSTGRES_USER=kong -e POSTGRES_DB=kong \
+    5  apt update -y 
+    6  apt install docker.io -y 
+    7  cat /etc/resolv.conf 
+    8  whoami 
+    9  swapon --show 
+   10  ls 
+   11  vim newfile
+   12  ls -i filesystem
+   13  stat newfile 
+   14  vim newfile 
+   15  stat newfile 
+   16  vim newfile 
+   17  stat newfile 
+   18  cat filesystem
+   19  cat newfile 
+   20  stat newfile 
+   21  ps aux 
+   22  clear
+   23  nohup command 
+   24  ss -tulnp 
+   25  netstat -ntlp
+   26  clear
+   27  mpstat -P ALL
+   28  iftop 
+   29  apt install iftop -y 
+   30  clear
+   31  iftop 
+   32  dmesg 
+   33  clear
+   34  dmesg 
+   35  clear
+   36  dmesg | grep -i error
+   37  ls 
+   38  cd /home/
+   39  ls 
+   40  cd /
+   41  ls 
+   42  du 
+   43  clear
+   44  df -f 
+   45  df 
+   46  df -h 
+   47  clear
+   48  df -h | grep -r 
+   49  ls 
+   50  df -h | grep -r dev/
+   51  clear
+   52  df -h | grep -r dev/ | head 
+   53  df -h  | head
+   54  df -h  | grep -r /dev/vda1
+   55  df -h  | grep -i tmpfs 
+   56  df -h  | grep -r /dev/shm/
+   57  clear
+   58  ls 
+   59  df -h  | grep -i tmpfs 
+   60  lsblk 
+   61  free 
+   62  fdisk -l
+   63  pvcreate /dev/vda1
+   64  iftop 
+   65  clear
+   66  kubectl  get nodes 
+   67  kubectl  get nodes -o 
+   68  kubectl  get nodes -o all
+   69  kubectl  get nodes -o wide 
+   70  iftop 
+   71  iptable -all 
+   72  iptables 
+   73  iptables -all 
+   74  iptables -L
+   75  clear
+   76  iptables -L
+   77  history 
