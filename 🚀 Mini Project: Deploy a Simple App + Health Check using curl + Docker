@@ -1,0 +1,125 @@
+🚀 Mini Project:
+Deploy a Simple App + Health Check using curl + Docker
+
+👉 Goal:
+
+Run an app in Docker
+
+Expose an API
+
+Use curl for health check
+
+Simulate DevOps monitoring
+
+🧱 Step 1: Create a Simple App
+
+We’ll use a Node.js app (very basic).
+
+👉 Create file: app.js
+
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+    if (req.url === '/health') {
+        res.writeHead(200, {'Content-Type': 'application/json'});
+        res.end(JSON.stringify({ status: 'UP' }));
+    } else {
+        res.writeHead(200);
+        res.end('Hello DevOps 🚀');
+    }
+});
+
+server.listen(3000, () => {
+    console.log('Server running on port 3000');
+});
+📦 Step 2: Create Dockerfile
+
+👉 Create Dockerfile
+
+FROM node:18
+
+WORKDIR /app
+
+COPY app.js .
+
+CMD ["node", "app.js"]
+🐳 Step 3: Build & Run Container
+docker build -t devops-app .
+docker run -d -p 3000:3000 devops-app
+🌐 Step 4: Test App Using curl
+
+👉 Normal request:
+
+curl http://localhost:3000
+
+👉 Health check:
+
+curl http://localhost:3000/health
+
+✔ Output:
+
+{"status":"UP"}
+🔥 Step 5: DevOps Health Check Script
+
+👉 Create health-check.sh
+
+#!/bin/bash
+
+URL="http://localhost:3000/health"
+
+response=$(curl -s -o /dev/null -w "%{http_code}" $URL)
+
+if [ "$response" -eq 200 ]; then
+  echo "✅ Application is UP"
+else
+  echo "❌ Application is DOWN"
+  exit 1
+fi
+
+👉 Run:
+
+chmod +x health-check.sh
+./health-check.sh
+🔁 Step 6: Continuous Monitoring (Like DevOps)
+while true; do ./health-check.sh; sleep 5; done
+
+✔ Checks app every 5 seconds
+✔ Simulates monitoring system
+
+💥 Step 7: Simulate Failure
+
+👉 Stop container:
+
+docker stop <container_id>
+
+👉 Now script output:
+
+❌ Application is DOWN
+
+✔ This is exactly how alerts work in real companies
+
+🧠 What You Learned (Important 🔥)
+Concept	You Practiced
+Docker	Build & run container
+API	Created /health endpoint
+curl	Health check & monitoring
+Bash	Automation script
+DevOps	Service monitoring
+🚀 Bonus (Next Level Upgrade)
+
+If you want to go pro:
+
+👉 Add:
+
+Jenkins pipeline → run health check after deploy
+
+Kubernetes → liveness/readiness probe
+
+Nginx → reverse proxy
+
+Logging → store curl results
+
+🧾 Interview Explanation (Use This 💯)
+
+👉
+“I created a Dockerized application with a health endpoint and used curl in a shell script to monitor service availability. This simulates real-world DevOps health checks and failure detection.”
