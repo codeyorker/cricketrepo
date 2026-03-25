@@ -280,6 +280,8 @@ Execute command	kubectl exec -it POD_NAME -- COMMAND
 Create resource	kubectl apply -f file.yaml
 Update image	kubectl set image deployment/NAME container=IMAGE
 Scale deployment	kubectl scale deployment/NAME --replicas=N
+
+
 Rollback	kubectl rollout undo deployment/NAME
 Delete resource	kubectl delete pod/service/deployment NAME
 Port forward	kubectl port-forward pod/NAME 8080:8000
