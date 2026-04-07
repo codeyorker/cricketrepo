@@ -283,6 +283,7 @@ kubectl get nodes
 kubectl get pods --all-namespaces
 The cluster should still show the remaining nodes as Ready, and the Kubernetes API should be accessible.
 
+
 HAProxy Routing:
 
 Ensure that HAProxy is routing traffic to the remaining master node. Check the stats page or use curl to test:
