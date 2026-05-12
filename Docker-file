@@ -88,7 +88,7 @@ WORKDIR: Opens the required folder
 ENV: To pass the env variables (inside container)
 ARGS: To pass the env variables (outside container)
 labels: to attach label to conatiner
-
+===================================================================================================
 
 EXAMPLE-1:
 FROM ubuntu
@@ -127,7 +127,7 @@ ADD https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin
 WORKDIR /tmp
 ENV name raham
 LABEL email rahamshaik007
-
+================================================================================================================
 HISTORY:
 
   1  yum install docker -y
@@ -428,7 +428,7 @@ docker-compose version
 stop vs kill:
 it will wait a few sec to stop the running process
 it won't wait to stop the process 
-
+==================================================================================================================
 WORKING:
 
 version: '3'
@@ -449,7 +449,7 @@ services:
     image: payrecharge:v1
     ports:
       - "93:80"
-
+===========================================================================================================================
 
 HISTORY:
  1  docker images
